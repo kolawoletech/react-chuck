@@ -1,0 +1,58 @@
+
+@import 'variables';
+@import 'typography';
+@import 'grid';
+@import 'buttons';
+@import 'search';
+
+body {
+
+	background: $grayGradient;
+	min-height: 100vh;
+	margin: 0;
+	overflow-x: hidden;
+
+}
+
+header {
+
+	color: $white;
+	padding: 60px 0 15px;
+
+	h1 {
+
+		font-family: "Anton", Sans-Serif;
+		text-transform: uppercase;
+		color: $darkBlue;
+
+	}
+
+	h2 {
+
+		color: $lightBlue;
+
+	}
+
+	p {
+
+		color: $black;
+
+	}
+
+}
+
+.input-group-text {
+
+	background: $lightBlue;
+	border: 1px solid $lightBlue;
+	color: $white;
+
+}
+
+blockquote {
+
+	font-size: 2em;
+	font-style: italic;
+	color: $lightBlue;
+
+}
