@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
-import requestData from "./requestData";
-import requestDetails from "./requestDetails";
+import getCategories from "./getCategories";
+import getCategoryJokes from "./getCategoryJokes";
 
 const rootReducer = combineReducers({
-  requestData,
-  requestDetails
+  getCategories,
+  getCategoryJokes
 });
 
 export default rootReducer;

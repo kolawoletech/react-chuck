@@ -1,15 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { requestData, requestDetails } from './actions/index'
+import { getCategories, getCategoryJokes } from './actions/index'
 
-import SearchComponent from './components/searchComponent'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.js'
 
-import '../sass/style.css'
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +18,7 @@ class App extends Component {
 
   async componentDidMount() {
     const { dispatch } = this.props
-    dispatch(requestData())
+    dispatch(getCategories())
   }
 
   userSearch(event) {
@@ -53,7 +48,7 @@ class App extends Component {
     const { dispatch } = this.props
 
     this.clearSearch(event)
-    dispatch(requestDetails(event.target.id.toLowerCase()))
+    dispatch(getCategoryJokes(event.target.id.toLowerCase()))
   }
 
   render() {
@@ -120,41 +115,11 @@ class App extends Component {
     return (
       <div>
         <div className="container">
-          <header>
-            <h1>SovTech Laugh Library</h1>
-            <h2>Brighten your day with a chuckle!</h2>
-
-            <p>Browse our collection of random jokes</p>
-          </header>
 
           <div className="grid">
             <div className="item">
               <div>
-                <div className="btn-group search">
-                  <SearchComponent
-                    searchTerm={searchTerm}
-                    searchSuggestions={searchSuggestions}
-                    userSearch={this.userSearch.bind(this)}
-                    clearSearch={this.clearSearch.bind(this)}
-                    placeHolder="Search for category..." />
-
-                  {/* Filter data if category detail data is empy */}
-
-                  {(detailsData == '' && updatedSearchSuggestions != null)
-                    ? <div className="grid">{updatedSearchSuggestions}</div>
-                    : null
-                  }
-
-                  {/* Display search sugggestions if category detail is not empty */}
-
-                  {(detailsData != '' && updatedSearchSuggestions != null && searchTerm != '')
-                    ? <Fragment>
-                      <div className="dropdown-menu">
-                        {updatedSearchSuggestions}</div>
-                    </Fragment>
-                    : null
-                  }
-                </div>
+            
 
                 {/* Get all category data on load */}
 
@@ -170,7 +135,7 @@ class App extends Component {
                           <div
                             className="item data-category"
                             key={index}
-                            onClick={() => dispatch(requestDetails(data))} >
+                            onClick={() => dispatch(getCategoryJokes(data))} >
                             <i className="fas fa-2x fa-thumbtack"></i>
                             <h4>{data.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase() })}</h4>
                             <span>
@@ -198,13 +163,13 @@ class App extends Component {
                           <a
                             href="#"
                             className="btn btn-default"
-                            onClick={() => dispatch(requestDetails())}>
+                            onClick={() => dispatch(getCategoryJokes())}>
                             Back
 								    					</a>
                           <a
                             href="#"
                             className="btn btn-primary"
-                            onClick={() => dispatch(requestDetails(category[0]))}>
+                            onClick={() => dispatch(getCategoryJokes(category[0]))}>
                             Get another
 										    			</a>
 
@@ -258,12 +223,12 @@ App.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { requestData, requestDetails } = state.rootReducer
+  const { getCategories, getCategoryJokes} = state.rootReducer
   return {
-    isFetchingAllData: requestData.isFetching,
-    allData: requestData.data,
-    isFetchingDataDetails: requestDetails.isFetching,
-    detailsData: requestDetails.data
+    isFetchingAllData: getCategories.isFetching,
+    allData: getCategories.data,
+    isFetchingDataDetails: getCategoryJokes.isFetching,
+    detailsData: getCategoryJokes.data
   }
 }
 

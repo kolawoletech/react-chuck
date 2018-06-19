@@ -10,7 +10,7 @@ const receiveFetchData = json => {
   return { type: RECEIVE_FETCH_DATA, data: json };
 };
 
-export const requestData = () => {
+export const getCategories = () => {
   return dispatch => {
     dispatch(requestFetchData());
     fetch("https://api.chucknorris.io/jokes/categories")
@@ -18,8 +18,6 @@ export const requestData = () => {
       .then(json => dispatch(receiveFetchData(json)));
   };
 };
-
-/* Get details from selected category via API */
 
 export const REQUEST_FETCH_DATA_DETAILS = "REQUEST_FETCH_DATA_DETAILS";
 const requestFetchDetails = () => {
@@ -37,7 +35,7 @@ const receiveFetchDetails = json => {
   return { type: RECEIVE_FETCH_DATA_DETAILS, data: json };
 };
 
-export const requestDetails = item => {
+export const getCategoryJokes = item => {
   if (item == undefined) {
     return dispatch => {
       dispatch(requestFetchDetailsReset());

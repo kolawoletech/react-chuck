@@ -1,5 +1,3 @@
-/* Action for requesting all category data */
-
 import { REQUEST_FETCH_DATA, RECEIVE_FETCH_DATA } from "../actions/index";
 
 export default function(
